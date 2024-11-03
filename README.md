@@ -1,3 +1,4 @@
 # React + Vite
 
-- suma en redux toolking
+- suma resta multiplicacion, resta
+

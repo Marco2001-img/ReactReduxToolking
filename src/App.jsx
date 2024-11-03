@@ -1,11 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setNumeroDos, setNumeroUno, setResultado } from './slice/OpSlice'
+import {  setNumeroDos, setNumeroUno, setResultadoSuma } from './slice/OpSlice'
 export default function App() {
   const dispatch = useDispatch()
   const numero1 = useSelector((state) => state.suma.numeroUNo)
   const numero2 = useSelector((state) => state.suma.numeroDos)
-  const resultado = useSelector((state) => state.suma.resultado)
+  const resultadoSuma = useSelector((state) => state.suma.resultadoSuma)
+  const resultadoResta = useSelector((state) => state.suma.resultadoResta)
+  const resultadoDivicion = useSelector((state) => state.suma.resultadoDivicion)
+  const resultadoMultiplicacion = useSelector((state) => state.suma.resultadoMultiplicacion)
+
 
   const onChangeNumero1 = (e) => {
     dispatch(setNumeroUno(Number(e.target.value)))
@@ -15,8 +19,8 @@ export default function App() {
     dispatch(setNumeroDos(Number(e.target.value)))
   }
 
-  const ResultadoSuma = () => {
-    dispatch(setResultado())
+  const ResultadoSuma = (e) => {
+    dispatch(setResultadoSuma())
   }
   
 
@@ -42,7 +46,10 @@ export default function App() {
       onClick={ResultadoSuma}
       >Sumar</button>
 
-      <p>Total: {resultado}</p>
+      <p>Suma: {resultadoSuma}</p>
+      <p>Resta: {resultadoResta}</p>
+      <p>Multiplicacion: {resultadoMultiplicacion}</p>
+      <p>Divicion: {resultadoDivicion}</p>
     </div>
   )
 }
