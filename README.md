@@ -1,4 +1,4 @@
 # React + Vite
 
-- suma resta multiplicacion, resta
+- area,perimetro, cuadrado,circulo,perimetro
 

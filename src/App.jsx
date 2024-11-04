@@ -1,55 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  setNumeroDos, setNumeroUno, setResultadoSuma } from './slice/OpSlice'
+import { setNumeroDos, setNumeroUno, setRectanguloArea, setRectanguloPerimetro } from './slice/OpSlice'
+
 export default function App() {
   const dispatch = useDispatch()
-  const numero1 = useSelector((state) => state.suma.numeroUNo)
-  const numero2 = useSelector((state) => state.suma.numeroDos)
-  const resultadoSuma = useSelector((state) => state.suma.resultadoSuma)
-  const resultadoResta = useSelector((state) => state.suma.resultadoResta)
-  const resultadoDivicion = useSelector((state) => state.suma.resultadoDivicion)
-  const resultadoMultiplicacion = useSelector((state) => state.suma.resultadoMultiplicacion)
+  const [seleccion, setSeleccion] = useState('')
+  const valor1 = useSelector((state) => state.ap.numeroUno)
+  const valor2 = useSelector((state) => state.ap.numeroDos)
+  const areaRectan = useSelector((state) => state.ap.AreaRectangulo)
+  const perimetroRectan = useSelector((state) => state.ap.PerimetroRectangulo)
 
+  const handleSeleccionarOnChange = (event) =>{
+    setSeleccion(event.target.value)
+  }
 
-  const onChangeNumero1 = (e) => {
+  const handleOnChangeNumeroUno = (e) =>{
     dispatch(setNumeroUno(Number(e.target.value)))
   }
 
-  const onChangeNumero2 = (e) => {
+  const handleOnChangeNumeroDos = (e) => {
     dispatch(setNumeroDos(Number(e.target.value)))
   }
 
-  const ResultadoSuma = (e) => {
-    dispatch(setResultadoSuma())
+  const handleResultadoRectangulo =() =>{
+    dispatch(setRectanguloArea())
+    dispatch(setRectanguloPerimetro())
   }
-  
 
   return (
     <div>
-      <h1>Suma</h1>
+      <h1>Figuras Geometricas</h1>
 
       <input 
       type="text"
-      value={numero1}
-      placeholder='Numero 1'
-      onChange={onChangeNumero1}
-      />  
-
-      <input 
-      type="text"
-      value={numero2}
-      placeholder='Numero 2'
-      onChange={onChangeNumero2}
+      value={valor1}
+      onChange={handleOnChangeNumeroUno}
+      placeholder='numero 1'
       />
 
-      <button
-      onClick={ResultadoSuma}
-      >Sumar</button>
+      <input 
+      type="text"
+      value={valor2}
+      onChange={handleOnChangeNumeroDos}
+      placeholder='Numero 2'
+      />
 
-      <p>Suma: {resultadoSuma}</p>
-      <p>Resta: {resultadoResta}</p>
-      <p>Multiplicacion: {resultadoMultiplicacion}</p>
-      <p>Divicion: {resultadoDivicion}</p>
+    <select onChange={handleSeleccionarOnChange} value={seleccion}>
+      <option value="1">Cuadrado</option>
+      <option value="2">Rectangulo</option>
+      <option value="3">Circulo</option>
+    </select>
+
+    <button
+    onClick={handleResultadoRectangulo}
+    >
+      Operacion
+    </button>
+
+    <p>Resultado Area: {areaRectan}</p>
+    <p>Resultado Permitro: {perimetroRectan}</p>
     </div>
   )
 }
